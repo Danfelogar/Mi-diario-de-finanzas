@@ -1,0 +1,432 @@
+
+.notes__main-content{
+    display: flex;
+    flex-direction: column;
+    // position: relative;
+    height: 100%;
+}
+
+.note__appbar{
+    align-items: center;
+    background-color:$blue-green;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding:10px 20px 10px 20px;
+}
+
+.notes__content{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+}
+
+.notes__tittle-input, .notes__textarea{
+    border: none;
+
+    &:focus{
+        outline: none;
+    }
+}
+
+.notes__tittle-input{
+    color:$prussian-blue;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.notes__textarea{
+    border:none;
+    color:$prussian-blue;
+    font-size: 20px;
+    flex: 1 1 auto;//para que se expanda lo mas posible
+    resize: none;//impide que el textarea se expanda o contraiga
+}
+
+.wrap__calculation-table{
+    background:rgba(0,0,0,0.7);
+    left: 0;
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+
+}
+
+.notes__calculation-table{
+    background-color: $cultured-2;
+    box-shadow: 0px 0px 14px 4px $charleston-green;
+    border-radius: 20px;
+    height: 70%;
+    left:670px;
+    padding: 40px 100px;
+    position: relative;
+    top: 140px;
+    width: 50%;
+    z-index: 1;
+
+    -webkit-box-shadow: 0px 0px 14px 4px $charleston-green;
+}
+
+//btn close
+
+.container__btn-close{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+@mixin transition() {
+    transition: all .4s cubic-bezier(.215,.61,.355,1);
+}
+
+div {
+  .btn-close {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    margin-top: -50px;
+    margin-right: -50px;
+    background-color: $davys-grey;
+    border-radius: 50px;
+    opacity: 1;
+    @include transition();
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(247,149,29,0.5);
+    -moz-box-shadow: 0px 0px 30px 0px rgba(247,149,29,0.5);
+    box-shadow: 0px 0px 30px 0px rgba(247,149,29,0.5);
+
+    & > span {
+      background-color: #f5a700;
+      display: block;
+      height: 12px;
+      border-radius: 6px;
+      position: relative;
+      @include transition();
+      position: absolute;
+      top: 50%;
+      margin-top: -6px;
+      left: 4px;
+      width: 64px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      -moz-justify-content: space-between;
+      -ms-justify-content: space-between;
+
+      span {
+        display: block;
+        background-color: #ed7f00;
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        @include transition();
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      &.left {
+        transform: rotate(45deg);
+        transform-origin: center;
+
+        .circle-left {
+          @include transition();
+          margin-left: 0;
+        }
+
+        .circle-right {
+          @include transition();
+          margin-left: 52px;
+        }
+      }
+
+      &.right {
+        transform: rotate(-45deg);
+        transform-origin: center;
+
+        .circle-left {
+          @include transition();
+          margin-left: 0;
+        }
+
+        .circle-right {
+          @include transition();
+          margin-left: 52px;
+        }
+      }
+    }
+
+    &:hover {
+      & > span {
+        background-color: #2faee0;
+        @include transition();
+
+        span {
+          @include transition();
+          background-color: #008ac9;
+        }
+
+        &.left {
+
+          .circle-left {
+            @include transition();
+            margin-left: 52px;
+          }
+
+          .circle-right {
+            @include transition();
+            margin-left: 0;
+          }
+        }
+
+        &.right {
+
+          .circle-left {
+            @include transition();
+            margin-left: 52px;
+          }
+
+          .circle-right {
+            @include transition();
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+//hasta aqui llega btn close
+
+.container__calculation-table{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container__calculation-table h1{
+  font-family: Georgia, serif;
+  font-size: 30px;
+  letter-spacing: 1px;
+  word-spacing: 0.2px;
+  color:$prussian-blue;
+  font-weight: 700;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: capitalize;
+  margin: 10px;
+}
+
+
+.note__alert-error{
+  background-color: $prussian-blue;
+  border: 2px solid $slate-gray;
+  height: auto;
+  padding: 10px;
+  margin: 5px;
+  width: auto;
+  color: $slate-gray;
+  border-radius: 15px;
+}
+.note__alert-error p{
+  font-family: Georgia, serif;
+  font-size: 19px;
+  letter-spacing: 1px;
+  word-spacing: 0.2px;
+  color: $cultured-2;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+
+.wrap-calculation{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.calculation-att, .calculation-res{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 20px;
+  letter-spacing: 1.2px;
+  word-spacing: 0.476px;
+  color: $slate-gray;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+
+.calculation-res{
+  color:$prussian-blue;
+}
+
+//comienzo de tablacontainer__calculatio
+.container__calculatio{
+  width: 10%;
+  height: 10%;
+}
+table {
+  // margin-left: 120px;
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+}
+table tr {
+  background: $cultured-2;
+  // border-bottom: 1px solid
+}
+table th{
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0px;
+  word-spacing: 1.6px;
+  color: $slate-gray;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  padding: 10px 20px;
+}
+
+table th span{
+  font-weight: bold;
+  color: $prussian-blue;
+}
+
+.calculaton-input{
+  background: transparent;
+  border: 0;
+  color: $prussian-blue;
+  outline: none;
+  width: 80vw;
+  max-width: 400px;
+  font-size: 1.5em;
+  transition: padding 0.3s 0.2s ease;
+
+  &:focus {
+    padding-bottom: 5px;
+  }
+
+  // sibling magic ;o
+  &:focus + .line {
+    &:after {
+      transform: scaleX(1);
+    }
+  }
+}
+input[type=number]::-webkit-input-placeholder { color: $slate-gray; }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.field {
+  position: relative;
+
+  .line {
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -8px;
+    background: $slate-gray;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      float: right;
+      width: 100%;
+      height: 3px;
+
+      transform: scalex(0);
+      transition: transform 0.3s ease;
+
+      background: $prussian-blue;
+    }
+  }
+}
+
+//fin de tabla
+
+.btn-calculate{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    background-color: $gunmetal;
+    border:0.3em solid $cultured-2;
+    border-radius: 30px;
+    margin:30px 0  20px  0;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:$cultured-2;
+    text-align:center;
+    transition: all 0.2s;
+
+    &:hover{
+    color:$gunmetal;
+    background-color:$cultured-2;
+    border:0.3em solid $gunmetal;
+    }
+}
+
+.bouncy{
+  animation:bouncy 5s infinite linear;
+  position:relative;
+  }
+  @keyframes bouncy {
+  0%{top:0em}
+  40%{top:0em}
+  43%{top:-0.9em}
+  46%{top:0em}
+  48%{top:-0.4em}
+  50%{top:0em}
+  100%{top:0em;}
+  }
+
+.notes__sub-content{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.notes__images img{
+    box-shadow: 5px 5px $prussian-blue;
+    height: 150px;
+}
+
+.notes__amortization-fee{
+    background-color: $prussian-blue;
+    border: none;
+    border-radius: 0.5rem;
+    color: $white;
+    height: 3rem;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 700;
+    text-transform: capitalize;
+    width: 9rem;
+    word-spacing: 2px;
+
+    &:hover {
+        background-color: darken($color: $honey-yellow, $amount: 15);//con esto lo pongo mas oscuro
+        color: $prussian-blue;
+    }
+}
