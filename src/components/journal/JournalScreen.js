@@ -18,8 +18,8 @@ export const JournalScreen = () => {
 
                 {
                     ( active )
-                        ? ( <NothingSelected/>  )//recuerda cambiar esto a donde esta el :
-                        : ( <NoteScreen /> )
+                        ? ( <NoteScreen /> )//recuerda cambiar esto a donde esta el :"acutalizavcion ya esta todo bien"
+                        : ( <NothingSelected/>  )
                 }
 
             </main>

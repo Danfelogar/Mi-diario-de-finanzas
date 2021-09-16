@@ -36,7 +36,7 @@
     transition: color .3s ease;
 
     &:hover{
-        color: darken($color:#fff, $amount: 20);
+        color: darken($color:$white, $amount: 20);
     }
 }
 
@@ -57,7 +57,7 @@
 }
 
 .journal__entry{
-    background-color: #fff;
+    background-color: $white;
     border-radius: 4px;
     color:$prussian-blue;
     display: flex;
@@ -70,11 +70,11 @@
     width: 75px;
 }
 
-.journal__entry-picture img{
-    object-fit:cover;
-    height:100%;
-    width:100%;
-}
+// .journal__entry-picture img{
+//     object-fit:cover;
+//     height:100%;
+//     width:100%;
+// }
 
 .journal__entry-body{
     padding: 10px;

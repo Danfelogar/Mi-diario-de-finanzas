@@ -15,6 +15,7 @@ import { login } from '../actions/auth';
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRoute';
 import { LoadingScreen } from '../components/loading/LoadingScreen';
+import {  startLoadingNotes } from '../actions/notes';
 
 export const  AppRouter  = () => {
 
@@ -27,11 +28,16 @@ export const  AppRouter  = () => {
     useEffect(() => {
         //creara observable que se puede disparar muchas veces para verificar o saber si el usuario cambia,se loguea, etc... verifica el cambio del user
 
-        firebase.auth().onAuthStateChanged( (user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
+            //como en el noteReducer el reducer de notes load recibe un apromesa es propio de nosotros poner un async y await
 
             if ( user?.uid ){
                 dispatch(login( user.uid, user.displayName ));
                 setIsLoggedIn( true );
+
+                dispatch( startLoadingNotes( user.uid ) );
+
+
             } else {
                 setIsLoggedIn ( false );
             }
