@@ -9,7 +9,7 @@ export const startNewNote = () => {
         console.log( uid );
 
         const newNote ={
-            tittle: '',
+            title: '',
             body: '',
             date: new Date().getTime()
         }
@@ -47,3 +47,22 @@ export const setNotes = ( notes ) =>({
     type: types.notesLoad,
     payload: notes
 })
+
+export const startSaveNote =( note ) =>{
+    //recordar que toda tarea sincrona y se trabajara con el middelwer thunk, por lo que es necesario las dependencias en el return
+    return async( dispatch, getState ) => {
+
+        const { uid } = getState().auth;
+
+        if( !note.url ){
+            delete note.url;
+        }
+
+        const noteToFirestore ={...note};
+        delete noteToFirestore.id;//con esto elimino el id del objeto para que no se suba dentro del note, recordar que el documento del journal en fire store ya tiene ese id para identificar la nota
+
+        await db.doc(`${ uid }/journal/notes/${ note.id }`).update(noteToFirestore);
+        //con esta promesa yo hago que se guarde las cosas de manera sincrona en fireStore
+
+    }
+}
