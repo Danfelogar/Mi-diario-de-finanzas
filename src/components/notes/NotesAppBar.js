@@ -5,7 +5,7 @@ import { startSaveNote } from '../../actions/notes';
 export const NotesAppBar = () => {
 
     const dispatch = useDispatch();
-    const { active } = useSelector(state => state.notes)
+    const { active } = useSelector(state => state.notes);
 
     const handleSave = () => {
         dispatch( startSaveNote(active) )
@@ -23,7 +23,7 @@ export const NotesAppBar = () => {
                 <button className="btn"
                 onClick={ handleSave }
                 >
-                    Save
+                    Save note
                 </button>
             </div>
         </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startCalculationProcess } from '../../actions/mathOperations';
+// import { activeNote, startSaveNote } from '../../actions/notes';
+
 // import { removeError, setError } from '../../actions/ui';
 import { removeError, setError, windowClose } from '../../actions/widowView';
 import { useForm } from '../../hooks/useFrom';
@@ -11,7 +13,13 @@ export const CalculateSubScreen = () => {
 
     const { view } = useSelector(state => state.window);
 
-    const { borrowedValue, monthlyFees, numberOfPayments, monthlyEffectiveRate, interestToPay } = useSelector(state => state.mathOperations);
+    // const { active } = useSelector(state => state.notes);
+
+    // const { id } =  active;
+
+    const cal = useSelector(state => state.mathOperations);
+
+    const { borrowedValue, monthlyFees, numberOfPayments, monthlyEffectiveRate, interestToPay } = cal;
 
     const { msgError } = useSelector(state => state.window);
 
@@ -54,6 +62,18 @@ export const CalculateSubScreen = () => {
     });
 
     const { number1, number2, number3 } = formValues;
+
+    // const handleNewCal = ()=>{
+    //     dispatch( startNewCal() );
+    // }
+
+    // const handleSaveCalculation =async()=>{
+
+    //     await dispatch( activeNote(id,cal) )
+
+    //     dispatch( startSaveNote(active) );
+
+    // }
 
     return (
         <section className="wrap__calculation-table">
@@ -136,6 +156,12 @@ export const CalculateSubScreen = () => {
                                     <div className="calculation-res">{ interestToPay }</div>
                                 </div>
                             </div>
+                            {/* <button
+                            onClick={ handleNewCal }
+                            className="btn-calculate bouncy btn-save"> Save new cal</button> */}
+                            <button
+                            // onClick={ handleSaveCalculation }
+                            className="btn-calculate bouncy btn-save"> Save calculation</button>
                         </div>
                     )
                 }

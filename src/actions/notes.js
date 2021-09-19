@@ -11,6 +11,11 @@ export const startNewNote = () => {
         const newNote ={
             title: '',
             body: '',
+            borrowedValue:'',
+            monthlyFees:'',
+            numberOfPayments:'',
+            monthlyEffectiveRate:'',
+            interestToPay:'',
             date: new Date().getTime()
         }
 
@@ -60,7 +65,7 @@ export const startSaveNote =( note ) =>{
 
         const noteToFirestore ={...note};
         delete noteToFirestore.id;//con esto elimino el id del objeto para que no se suba dentro del note, recordar que el documento del journal en fire store ya tiene ese id para identificar la nota
-
+        // debugger
         await db.doc(`${ uid }/journal/notes/${ note.id }`).update(noteToFirestore);
         //con esta promesa yo hago que se guarde las cosas de manera sincrona en fireStore
 

@@ -21,3 +21,23 @@ export const loadNotes = async (uid) => {
 
     return notes;
 }
+
+// export const loadCals = async (uid) => {
+
+//     const calSnap = await db.collection(`${ uid }/journal/mathOperations`).get();
+//     // tenemos que llamar las colleciones del firebase que en este caso son todas las entradas que he creado en mi usuario para ello debemos llamarlo asi...(esta collection sale guiandonos de la web de firebase para guiarnos y llamarlo en este codigo)
+//     const cals = [];
+
+//     calSnap.forEach( snapSon => {
+//         cals.push({
+//             id: snapSon.id,
+//             ...snapSon.data()
+//         })
+//     });
+
+//     //generaremos un nuevo arreglo para almacenarlo en notes que me regresaria en este caso el elementeo hijo o snapSon para el nuevo arreglo le sumaremos o empujaremos lo contenido en el .push({})
+
+//     console.log(cals);
+
+//     return cals;
+// }

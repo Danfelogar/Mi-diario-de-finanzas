@@ -22,7 +22,6 @@ export const types ={
     notesLoad: '[Notes] Load notes',
     notesUpdated: '[Notes] Update note saved',
     notesFileUrl: '[Notes] Update image url',
-    notesFileCalculate: '[Notes] calculate fees simulation',
     notesDelete: '[Notes] Delete note',
     notesLogoutCleaning: '[Notes] Logout Cleaning',
 
@@ -34,4 +33,5 @@ export const types ={
 
     //Ejecutar calculo
     feesCalculation: '[MathOperations] Fees Calculation',
+    // calsActive: '[MathOperations] Set active Calculation',
 }

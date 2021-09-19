@@ -9,6 +9,7 @@ export const notesReducer = ( state=initialState , action )=> {
 
     switch (action.type) {
         case types.notesActive:
+            // debugger
             return{
                 ...state,
                 active: {

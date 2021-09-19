@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { activeNote } from '../../actions/notes';
+import { activeNote, startSaveNote } from '../../actions/notes';
 import { windowOpen } from '../../actions/widowView';
 import { useForm } from '../../hooks/useFrom';
 import { CalculateSubScreen } from './CalculateSubScreen';
@@ -13,6 +13,10 @@ export const NoteScreen = () => {
 
     const { active:note } = useSelector( state => state.notes );
 
+    const cal  = useSelector(state => state.mathOperations);
+
+    const { borrowedValue, monthlyFees, numberOfPayments, monthlyEffectiveRate, interestToPay } = cal ;
+
     const [ formValues, handleInputChange, reset ] = useForm( note );
 
     const { body, title } = formValues;
@@ -22,7 +26,7 @@ export const NoteScreen = () => {
 
     useEffect(() => {
         if(note.id !== activeId.current){
-            reset( note );
+            // reset( note );
             activeId.current = note.id
         }
 
@@ -30,9 +34,21 @@ export const NoteScreen = () => {
 
     useEffect(() => {
 
-        dispatch( activeNote(formValues.id, {...formValues}) );
+        dispatch( activeNote(formValues.id,{...formValues}) );
 
-    }, [formValues,dispatch])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formValues,dispatch])//con esto guardo las notas en el active cada vez que cambian las dependencias
+
+    // const handleSaveCalulation =
+
+    const handleSaveCalculation =async()=>{
+
+        await dispatch( activeNote(formValues.id,{...formValues,...cal}) )
+
+        dispatch( startSaveNote(note) );
+
+    }
 
     const { view } = useSelector( state => state.window );
 
@@ -41,7 +57,7 @@ export const NoteScreen = () => {
             dispatch(windowOpen());
         }
     }
-
+    // debugger
     return (
         <div className="notes__main-content">
             <NotesAppBar/>
@@ -84,6 +100,28 @@ export const NoteScreen = () => {
                         </div>
                         )
                     }
+                    <div className="container__calculation">
+                            <h1>Financial calculation summary</h1>
+                            <div className="wrap-calculation">
+                                <div className="calculation-attributes">
+                                    <div className="calculation-att">Borrowed value:</div>
+                                    <div className="calculation-att">Monthly fees:</div>
+                                    <div className="calculation-att">Number of payments:</div>
+                                    <div className="calculation-att">Monthly Effective Rate:</div>
+                                    <div className="calculation-att">Interest to Pay:</div>
+                                </div>
+                                <div className="calculation-results">
+                                    <div className="calculation-res">{  borrowedValue || note?.borrowedValue  }</div>
+                                    <div className="calculation-res">{ monthlyFees || note?.monthlyFees }</div>
+                                    <div className="calculation-res">{ numberOfPayments || note?.numberOfPayments }</div>
+                                    <div className="calculation-res">{ monthlyEffectiveRate || note?.monthlyEffectiveRate }</div>
+                                    <div className="calculation-res">{ interestToPay || note?.interestToPay }</div>
+                                </div>
+                            </div>
+                            <button
+                            onClick={ handleSaveCalculation }
+                            className="btn-calculate bouncy btn-save"> Save calculation</button>
+                        </div>
                     <button
                     className="notes__amortization-fee"
                     onClick={ handleAddFees }

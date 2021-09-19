@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux';
 
 import { activeNote } from '../../actions/notes';
 
-export const JournalEntry = ({id, date,title, body, url}) => {
+export const JournalEntry = ({id, date,title, body, url,borrowedValue,
+monthlyFees,
+numberOfPayments,
+monthlyEffectiveRate,
+interestToPay}) => {
 
     const dispatch = useDispatch();
 
@@ -12,7 +16,11 @@ export const JournalEntry = ({id, date,title, body, url}) => {
 
     const handleEntryClick = () => {
         dispatch( activeNote(id,{
-        date,title, body, url
+        date,title, body, url,borrowedValue,
+        monthlyFees,
+        numberOfPayments,
+        monthlyEffectiveRate,
+        interestToPay
         }) );
     }
 
