@@ -10,7 +10,7 @@ export const JournalScreen = () => {
     const { active } = useSelector(state => state.notes)//con esto recuerda por enecima vezs que puedes extraer cosas del store
 
     return (
-        <div className="journal__main-content">
+        <div className="journal__main-content animate__animated animate__fadeIn animate__faster">
 
             <Sidebar />
 

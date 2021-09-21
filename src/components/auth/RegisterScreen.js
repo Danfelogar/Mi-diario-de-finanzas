@@ -62,7 +62,9 @@ export const RegisterScreen = () => {
                 )
             }
 
-            <form onSubmit={ handleRegister } >
+            <form
+            className="animate__animated animate__flipInY animate__faster"
+            onSubmit={ handleRegister } >
                 <input
                 className="auth_input"
                 type="text"

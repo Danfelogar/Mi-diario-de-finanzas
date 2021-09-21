@@ -1,9 +1,7 @@
 import React from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { startCalculationProcess } from '../../actions/mathOperations';
-// import { activeNote, startSaveNote } from '../../actions/notes';
-
-// import { removeError, setError } from '../../actions/ui';
 import { removeError, setError, windowClose } from '../../actions/widowView';
 import { useForm } from '../../hooks/useFrom';
 
@@ -159,9 +157,6 @@ export const CalculateSubScreen = () => {
                             {/* <button
                             onClick={ handleNewCal }
                             className="btn-calculate bouncy btn-save"> Save new cal</button> */}
-                            <button
-                            // onClick={ handleSaveCalculation }
-                            className="btn-calculate bouncy btn-save"> Save calculation</button>
                         </div>
                     )
                 }

@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
+import { noteLogout } from './notes';
 import { finishLoading, startLoading } from "./ui";
 
 //de esta manera se puede ejecutar cualquier acciones asinc
@@ -73,6 +74,7 @@ export const startLogout = () =>{
         await firebase.auth().signOut();
         //espraremos a que todo esto se ejecute para encadenar una accion que borrara mi uid y el displayName del store
         dispatch( logout() );
+        dispatch( noteLogout() );
     }
 }
 

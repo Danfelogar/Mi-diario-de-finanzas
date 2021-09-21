@@ -25,7 +25,9 @@ interestToPay}) => {
     }
 
     return (
-        <div className="journal__entry pointer"
+        <div className="journal__entry pointer
+        animate__animated animate__fadeIn animate__faster
+        "
         onClick={ handleEntryClick }
         >
 
@@ -47,6 +49,12 @@ interestToPay}) => {
                 </p>
                 <p className="journal__entry-content">
                     { body }
+                </p>
+                <p className="journal__entry-sub-tittle">
+                Monthly fees: { (monthlyFees)
+                ?( monthlyFees )
+                :( `not calculated` )
+                }
                 </p>
             </div>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { activeNote, startSaveNote } from '../../actions/notes';
+import { activeNote, startDeleting, startSaveNote } from '../../actions/notes';
 import { windowOpen } from '../../actions/widowView';
 import { useForm } from '../../hooks/useFrom';
 import { CalculateSubScreen } from './CalculateSubScreen';
@@ -19,14 +19,14 @@ export const NoteScreen = () => {
 
     const [ formValues, handleInputChange, reset ] = useForm( note );
 
-    const { body, title } = formValues;
+    const { body, title, id } = formValues;
 
     const activeId = useRef( note.id );
     //basicamente me permite modificar una variable mutable que no me va a redibujar todo el componente si cambia
 
     useEffect(() => {
         if(note.id !== activeId.current){
-            // reset( note );
+            reset( note );
             activeId.current = note.id
         }
 
@@ -50,6 +50,12 @@ export const NoteScreen = () => {
 
     }
 
+    const handleDelete = () =>{
+
+        dispatch (startDeleting( id ));
+
+    }
+
     const { view } = useSelector( state => state.window );
 
     const handleAddFees = () =>{
@@ -59,7 +65,9 @@ export const NoteScreen = () => {
     }
     // debugger
     return (
-        <div className="notes__main-content">
+        <div className="notes__main-content
+        animate__animated animate__fadeIn
+        ">
             <NotesAppBar/>
 
             <div className="notes__content">
@@ -94,34 +102,34 @@ export const NoteScreen = () => {
                         (
                             <div className="notes__images">
                             <img
-                            src="https://cdn.pixabay.com/photo/2020/07/24/03/12/gengar-5432819__480.png"
+                            src={ note.url }
                             alt="gengar besto pk"
                             />
                         </div>
                         )
                     }
                     <div className="container__calculation">
-                            <h1>Financial calculation summary</h1>
-                            <div className="wrap-calculation">
-                                <div className="calculation-attributes">
-                                    <div className="calculation-att">Borrowed value:</div>
-                                    <div className="calculation-att">Monthly fees:</div>
-                                    <div className="calculation-att">Number of payments:</div>
-                                    <div className="calculation-att">Monthly Effective Rate:</div>
-                                    <div className="calculation-att">Interest to Pay:</div>
-                                </div>
-                                <div className="calculation-results">
-                                    <div className="calculation-res">{  borrowedValue || note?.borrowedValue  }</div>
-                                    <div className="calculation-res">{ monthlyFees || note?.monthlyFees }</div>
-                                    <div className="calculation-res">{ numberOfPayments || note?.numberOfPayments }</div>
-                                    <div className="calculation-res">{ monthlyEffectiveRate || note?.monthlyEffectiveRate }</div>
-                                    <div className="calculation-res">{ interestToPay || note?.interestToPay }</div>
-                                </div>
+                        <h1>Financial calculation summary</h1>
+                        <div className="wrap-calculation">
+                            <div className="calculation-attributes">
+                                <div className="calculation-att">Borrowed value:</div>
+                                <div className="calculation-att">Monthly fees:</div>
+                                <div className="calculation-att">Number of payments:</div>
+                                <div className="calculation-att">Monthly Effective Rate:</div>
+                                <div className="calculation-att">Interest to Pay:</div>
                             </div>
-                            <button
-                            onClick={ handleSaveCalculation }
-                            className="btn-calculate bouncy btn-save"> Save calculation</button>
+                            <div className="calculation-results">
+                                <div className="calculation-res">{  borrowedValue || note?.borrowedValue  }</div>
+                                <div className="calculation-res">{ monthlyFees || note?.monthlyFees }</div>
+                                <div className="calculation-res">{ numberOfPayments || note?.numberOfPayments }</div>
+                                <div className="calculation-res">{ monthlyEffectiveRate || note?.monthlyEffectiveRate }</div>
+                                <div className="calculation-res">{ interestToPay || note?.interestToPay }</div>
+                            </div>
                         </div>
+                        <button
+                        onClick={ handleSaveCalculation }
+                        className="btn-calculate btn-save"> Save calculation</button>
+                    </div>
                     <button
                     className="notes__amortization-fee"
                     onClick={ handleAddFees }
@@ -130,6 +138,10 @@ export const NoteScreen = () => {
                     </button>
                 </div>
             </div>
+            <button
+            className="btn btn-danger"
+            onClick={ handleDelete }
+            >Delete</button>
         </div>
     )
 }

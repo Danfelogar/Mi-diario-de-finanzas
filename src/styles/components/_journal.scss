@@ -20,6 +20,98 @@
     justify-content: space-between;
 }
 
+//incio btn filter
+
+$search-time: 800ms;
+$reset-time: 150ms;
+
+.body-filter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+	overflow: hidden;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
+.search-box {
+	border: solid 5px $light-gray;
+	display: inline-block;
+	position: relative;
+	border-radius: 50px;
+	input[type="text"] {
+		font-family: Raleway, sans-serif;
+		font-size: 20px;
+		font-weight: bold;
+		width: 50px;
+		height: 50px;
+		padding: 5px 40px 5px 10px;
+		border: none;
+		box-sizing: border-box;
+		border-radius: 50px;
+		transition: width $search-time cubic-bezier(0.68, -0.55, 0.27, 1.55) $reset-time;
+		&:focus {
+			outline: none;
+		}
+		&:focus, &:not(:placeholder-shown) {
+			width: 300px;
+			transition: width $search-time cubic-bezier(0.68, -0.55, 0.27, 1.55);
+			+ button[type="reset"] {
+				bottom: 13px;
+				right: 10px;
+				transition:
+					bottom $reset-time ease-out $search-time
+				, right $reset-time ease-out $search-time;
+			}
+			+ button[type="reset"]:after {
+				top: 0;
+				right: 10px;
+				opacity: 1;
+				transition:
+					top $reset-time ease-out ($search-time + $reset-time)
+				, right $reset-time ease-out ($search-time + $reset-time)
+				, opacity $reset-time ease ($search-time + $reset-time);
+			}
+		}
+	}
+	button[type="reset"] {
+		background-color: transparent;
+		width: 25px;
+		height: 25px;
+		border: 0;
+		padding: 0;
+		outline: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		bottom: -13px;
+		right: -15px;
+		transition: bottom $reset-time ease-out $reset-time, right $reset-time ease-out $reset-time;
+		&:before, &:after {
+			content: "";
+			height: 25px;
+			border-left: solid 5px $light-gray;
+			position: absolute;
+			transform: rotate(-45deg);
+		}
+		&:after {
+			transform: rotate(45deg);
+			opacity: 0;
+			top: -20px;
+			right: -10px;
+			transition:
+				top $reset-time ease-out
+			, right $reset-time ease-out
+			, opacity $reset-time ease-out;
+		}
+	}
+}
+
+
+//final btn filter
+
 .journal__sidebar-navbar h3{
     font-weight: lighter;
 }
@@ -30,7 +122,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 30px;
+    margin: 35px auto;
     width: 100%;
 
     transition: color .3s ease;
@@ -61,12 +153,13 @@
     border-radius: 4px;
     color:$prussian-blue;
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
     overflow: hidden;//todo lo que se pase queda oculto
 }
 
 .journal__entry-picture{
-    height: 75px;
+    height: auto;
     width: 75px;
 }
 
@@ -78,6 +171,9 @@
 
 .journal__entry-body{
     padding: 10px;
+    max-height: 85px;
+    max-width: 230px;
+    // line-height: 15px;
 }
 
 .journal__entry-tittle{
@@ -85,8 +181,13 @@
     font-weight: bold;
 }
 
+.journal__entry-sub-tittle{
+    font-size: 13px;
+    font-weight: bold;
+}
+
 .journal__entry-content{
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .journal__entry-date-box{
