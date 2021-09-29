@@ -45,7 +45,7 @@ export const NoteScreen = () => {
     const handleSaveCalculation =async()=>{
 
         const resultForSave = {...formValues,...cal}
-        debugger
+
         await dispatch( activeNote(formValues.id,{...resultForSave }) )
 
         dispatch( startSaveNote(resultForSave) );
