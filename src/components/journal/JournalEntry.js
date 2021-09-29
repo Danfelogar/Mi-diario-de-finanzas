@@ -31,17 +31,15 @@ interestToPay}) => {
         onClick={ handleEntryClick }
         >
 
-            {
-                (url) &&
-                (<div
+                <div
                 className="journal__entry-picture"
                 style={{
                     backgroundSize: 'cover',
-                    backgroundImage:`url( ${ url } )`
+                    backgroundImage:`url( ${ url ? url : `https://csr.dot.ca.gov/images/imgnotavail.jpg` } )`
                 }}
                 >
-                </div>)
-            }
+                </div>
+
 
             <div className="journal__entry-body">
                 <p className="journal__entry-tittle">

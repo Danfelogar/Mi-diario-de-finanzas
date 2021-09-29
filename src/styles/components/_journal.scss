@@ -161,6 +161,7 @@ $reset-time: 150ms;
 .journal__entry-picture{
     height: auto;
     width: 75px;
+	flex-shrink: 0;//que las medidas que coloque se respeten para que no se expanda o contraiga
 }
 
 // .journal__entry-picture img{
@@ -179,6 +180,11 @@ $reset-time: 150ms;
 .journal__entry-tittle{
     font-size: 14px;
     font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1; /* number of lines to show */
+	-webkit-box-orient: vertical;
 }
 
 .journal__entry-sub-tittle{
@@ -188,6 +194,11 @@ $reset-time: 150ms;
 
 .journal__entry-content{
     font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+	-webkit-box-orient: vertical;
 }
 
 .journal__entry-date-box{
