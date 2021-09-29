@@ -15,7 +15,7 @@ export const NoteScreen = () => {
 
     const cal  = useSelector(state => state.mathOperations);
 
-    const { borrowedValue, monthlyFees, numberOfPayments, monthlyEffectiveRate, interestToPay } = cal ;
+    // const { borrowedValue, monthlyFees, numberOfPayments, monthlyEffectiveRate, interestToPay } = cal ;
 
     const [ formValues, handleInputChange, reset ] = useForm( note );
 
@@ -44,9 +44,11 @@ export const NoteScreen = () => {
 
     const handleSaveCalculation =async()=>{
 
-        await dispatch( activeNote(formValues.id,{...formValues,...cal}) )
+        const resultForSave = {...formValues,...cal}
+        debugger
+        await dispatch( activeNote(formValues.id,{...resultForSave }) )
 
-        dispatch( startSaveNote(note) );
+        dispatch( startSaveNote(resultForSave) );
 
     }
 
@@ -119,16 +121,16 @@ export const NoteScreen = () => {
                                 <div className="calculation-att">Interest to Pay:</div>
                             </div>
                             <div className="calculation-results">
-                                <div className="calculation-res">{  borrowedValue || note?.borrowedValue  }</div>
-                                <div className="calculation-res">{ monthlyFees || note?.monthlyFees }</div>
-                                <div className="calculation-res">{ numberOfPayments || note?.numberOfPayments }</div>
-                                <div className="calculation-res">{ monthlyEffectiveRate || note?.monthlyEffectiveRate }</div>
-                                <div className="calculation-res">{ interestToPay || note?.interestToPay }</div>
+                                <div className="calculation-res">{   note?.borrowedValue  }</div>
+                                <div className="calculation-res">{  note?.monthlyFees }</div>
+                                <div className="calculation-res">{  note?.numberOfPayments }</div>
+                                <div className="calculation-res">{  note?.monthlyEffectiveRate }</div>
+                                <div className="calculation-res">{  note?.interestToPay }</div>
                             </div>
                         </div>
                         <button
                         onClick={ handleSaveCalculation }
-                        className="btn-calculate btn-save"> Save calculation</button>
+                        className="btn-calculate btn-save"> Save calculation Here</button>
                     </div>
                     <button
                     className="notes__amortization-fee"

@@ -20,7 +20,7 @@ export const JournalEntries = () => {
             className="search-box">
                 <input
                 type="text"
-                placeholder="hola"
+                placeholder="Search by your title"
                 name="searchText"
                 value={ searchText }
                 autoComplete="off"
